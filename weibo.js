@@ -17,7 +17,6 @@ fetch('https://weibo-top-api.vercel.app/api').then(data => data.json()).then(dat
     }
     html += '</div>'
     document.getElementById('weibo').getElementsByClassName('item-content')[0].innerHTML = html
-    console.log(ele[0]);
 }).catch(function(error) {
     console.log(error);
 });
