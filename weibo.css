@@ -1,3 +1,4 @@
+/* 微博排行榜 */
 
 .weibo-new {
     background: #ff3852
@@ -45,15 +46,11 @@
 
 #weibo-container {
     width: 100%;
-    height: 200px;
+    height: 140px;
     font-size: 95%;
     overflow-y: auto;
     -ms-overflow-style: none;
     scrollbar-width: none
-}
-
-#weibo-container::-webkit-scrollbar {
-    display: none
 }
 
 .weibo-list-item {
@@ -80,4 +77,12 @@
     transform: scale(.8) translateX(-3px);
     color: #fff;
     border-radius: 8px
+}
+
+#weibo-container a {
+    color: #555;
+}
+
+[data-theme='dark'] #weibo-container a {
+    color: rgba(255, 255, 255, 0.7);
 }

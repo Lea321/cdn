@@ -1,9 +1,4 @@
-try {
-    let w = document.getElementById('weibo').clientWidth
-    if (w) {
-        weibo();
-    }
-} catch (error) {}
+try { if (document.getElementById('weibo').clientWidth) weibo(); } catch (error) {}
 
 function weibo() {
     let hotness = {
@@ -20,7 +15,7 @@ function weibo() {
     let data = JSON.parse(localStorage.getItem('weibo'));
     let nowTime = Date.now();
     let ls;
-    if (data == null || nowTime - data.time > 600000) {
+    if (data == null || nowTime - data.time > 600000) { // 600000为缓存时间，即10分钟，防止频繁请求，加快本地访问速度。
         getData();
         return
     } else {
@@ -31,17 +26,13 @@ function weibo() {
             '<span class="weibo-title"><a title="' + item.title + '"href="' + item.url + '" target="_blank" rel="external nofollow noreferrer">' + item.title + '</a></span>' +
             '<div class="weibo-num"><span>' + item.num + '</span></div></div>'
     }
-    html += '</div>'
-    document.getElementById('weibo').getElementsByClassName('item-content')[0].innerHTML = html
+    html += '</div>';
+    document.getElementById('weiboContent').innerHTML = html;
 }
 
 function getData() {
-    fetch('https://weibo-top-api.vercel.app/api').then(data => data.json()).then(data => {
+    fetch('https://api.leonus.cn/weibo').then(data => data.json()).then(data => {
         data = { time: Date.now(), ls: JSON.stringify(data) }
         localStorage.setItem('weibo', JSON.stringify(data))
-        console.log('微博热搜获取完成！');
-    }).then(() => {
-        weibo();
-    });
-
+    }).then(weibo);
 }
